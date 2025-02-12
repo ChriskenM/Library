@@ -1,35 +1,73 @@
-<h1>Sign Up</h1>
+<h1 class="text-center mt-5">Sign Up</h1>
 
-<%= form_with model: @user, local: true do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with model: @user, local: true, data: { turbo: "false" }, class: "needs-validation", novalidate: true do |form| %>
+        <div class="mb-3">
+          <%= form.label :email_address, "Email Address", class: "form-label" %>
+          <%= form.email_field :email_address, class: "form-control", required: true, placeholder: "Enter your email address" %>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :password, class: "form-label" %>
+          <%= form.password_field :password, class: "form-control", required: true, placeholder: "Enter your password" %>
+          <div class="invalid-feedback">
+            Please enter your password.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :password_confirmation, class: "form-label" %>
+          <%= form.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Confirm your password" %>
+          <div class="invalid-feedback">
+            Please confirm your password.
+          </div>
+        </div>
+
+        <div class="d-grid">
+          <%= form.submit "Sign Up", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-3">
+        <%= link_to 'Sign In', sign_in_path, class: "text-decoration-none" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+<%# Bootstrap form validation JavaScript %>
+<script>
+  (function () {
+    'use strict'
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
+    var forms = document.querySelectorAll('.needs-validation')
 
-  <div class="actions">
-    <%= form.submit "Sign Up" %>
-  </div>
-<% end %>
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
 
-<%= link_to 'Sign In', sign_in_path %>
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
