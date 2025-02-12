@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  skip_before_action :require_sign_in, only: [:new, :create]
+  before_action :redirect_if_signed_in, only: [:new, :create]
+
+
     def new
         @user = User.new
       end
@@ -13,6 +17,12 @@ class UsersController < ApplicationController
       end
 
       private
+
+      def redirect_if_signed_in
+        if current_user
+          redirect_to root_path, notice: "You are already signed in."
+        end
+      end
 
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation)

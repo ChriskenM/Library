@@ -22,7 +22,8 @@
         <% if current_user %>
         <!-- Show Sign Out link if the user is signed in -->
         <li class="nav-item">
-          <%= link_to 'Sign Out', sign_out_path, method: :delete, class:"nav-link" %>
+          <%= button_to 'Sign Out', sign_out_path, method: :delete, class: 'nav-link' %>
+
         </li>
       <% else %>
         <!-- Show Sign In and Sign Up links if the user is not signed in -->

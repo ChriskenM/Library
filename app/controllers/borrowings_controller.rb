@@ -1,4 +1,7 @@
 class BorrowingsController < ApplicationController
+    # This filter will require sign in for actions unless explicitly skipped
+    before_action :require_sign_in
+
   before_action :set_book, only: [:create]
 
   def create
