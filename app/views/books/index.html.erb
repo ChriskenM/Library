@@ -1,18 +1,24 @@
-<h1>Library Books</h1>
+<h1 class="text-center">Borrow Books</h1>
+
 <% if current_user %>
-  <ul>
+  <div class="row">
     <% @books.each do |book| %>
-      <li>
-        <%= link_to book.title, book_path(book) %> by <%= book.author %>
-        <% if book.borrowings.exists? %>
-          <span>(Currently Borrowed)</span>
-        <% else %>
-          <span>(Available)</span>
-          <%= link_to 'Borrow', borrowings_path(book_id: book.id), method: :post %>
-        <% end %>
-      </li>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to book.title, book_path(book), class: "text-dark text-decoration-none" %></h5>
+            <p class="card-text">by <%= book.author %></p>
+            <% if book.borrowings.exists? %>
+              <p class="text-muted">(Currently Borrowed)</p>
+            <% else %>
+              <p class="text-success">(Available)</p>
+              <%= link_to 'Borrow', borrowings_path(book_id: book.id), method: :post, class: "btn btn-outline-secondary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>You need to be signed in to borrow books.</p>
 <% end %>

@@ -36,10 +36,15 @@
         <% end %>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+      <!-- Replace search form with logo and text placeholder -->
+      <div class="d-flex align-items-center rounded-pill overflow-hidden bg-light shadow-sm"
+      style="min-width: 300px; padding: 5px; opacity: 0.5; transition: opacity 0.3s ease-in-out;">
+   <%= image_tag "grey.jpeg", alt: "Logo", width: 300, height: 30, class: "rounded-pill me-1" %>
+
+ </div>
+
+
     </div>
   </div>
 </nav>

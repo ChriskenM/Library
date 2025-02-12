@@ -5,9 +5,11 @@
 <% if @book.borrowings.exists? %>
   <p><strong>This book is currently borrowed.</strong></p>
 <% else %>
-<%= form_with url: borrowings_path(book_id: @book.id), method: :post, local: true do |form| %>
-  <%= form.submit "Borrow this Book" %>
+  <%= form_with url: borrowings_path(book_id: @book.id), method: :post, local: true do |form| %>
+    <div class="mb-3">
+      <%= form.submit "Borrow this Book", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 <% end %>
 
-<% end %>
 

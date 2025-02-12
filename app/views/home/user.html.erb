@@ -1,14 +1,19 @@
-<h1>My Borrowed Books</h1>
+<h1 class="text-center">My Borrowed Books</h1>
 
 <% if current_user %>
-  <ul>
+  <div class="row">
     <% current_user.borrowings.each do |borrowing| %>
-      <li>
-        <%= borrowing.book.title %> (Due: <%= borrowing.due_date %>)
-        <%= button_to "Return", borrowing_path(borrowing), method: :delete %>
-      </li>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= borrowing.book.title %></h5>
+            <p class="card-text">Due: <%= borrowing.due_date %></p>
+            <%= button_to "Return", borrowing_path(borrowing), method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <p>You need to be signed in to view your borrowed books.</p>
 <% end %>

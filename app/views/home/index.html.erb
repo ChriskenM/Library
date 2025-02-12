@@ -1,22 +1,27 @@
 <%# Home page content %>
 <div class="container mt-5">
   <% if current_user %>
-    <h1>Library Books</h1>
-    <ul>
+    <h1 class="text-center">Library Books</h1>
+    <div class="row">
       <% Book.all.each do |book| %>
-        <li>
-          <%= link_to book.title, book_path(book) %> by <%= book.author %>
-          <% if book.borrowings.exists? %>
-            <span>(Currently Borrowed)</span>
-          <% else %>
-            <span>(Available)</span>
-          <% end %>
-        </li>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <%= link_to book.title, book_path(book), class: "h5" %> by <%= book.author %>
+              <% if book.borrowings.exists? %>
+                <p class="text-muted">(Currently Borrowed)</p>
+              <% else %>
+                <p class="text-success">(Available)</p>
+                <%= link_to 'Borrow', borrowings_path(book_id: book.id), class: "btn btn-outline-secondary btn-sm" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
   <% else %>
-    <h1>Library Books</h1>
-    <p>Please sign in to view available books.</p>
+    <h1 class="text-center">Library Books</h1>
+    <p class="text-center">Please sign in to view available books.</p>
 
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -78,4 +83,3 @@
       })
   })()
 </script>
-
