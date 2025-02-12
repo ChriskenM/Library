@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :passwords, param: :token
 
+  resources :users, only: [:show]
+
   # Session routes for sign in
   get 'sign_in', to: 'sessions#new', as: 'sign_in'    # sign-in page
   post 'sign_in', to: 'sessions#create'                 # sign-in action
