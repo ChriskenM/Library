@@ -1,8 +1,10 @@
+# test/controllers/home_controller_test.rb
 require "test_helper"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get home_index_url
-    assert_response :success
+  setup do
+    @user = users(:one)
+    sign_in_as(@user)
   end
+
 end

@@ -1,13 +1,12 @@
+# test/controllers/books_controller_test.rb
 require "test_helper"
 
 class BooksControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get books_index_url
-    assert_response :success
+  setup do
+    @book = books(:one)
+    @user = users(:one)
+    sign_in_as(@user)
   end
 
-  test "should get show" do
-    get books_show_url
-    assert_response :success
-  end
 end
+

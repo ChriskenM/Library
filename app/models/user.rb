@@ -5,5 +5,5 @@ class User < ApplicationRecord
   #has_many :books, through: :borrowings
 
   validates :email_address, presence: true, uniqueness: true
-  validates :password, length: { minimum: 6 }, on: :create
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 end

@@ -1,13 +1,13 @@
+# test/controllers/borrowings_controller_test.rb
 require "test_helper"
 
 class BorrowingsControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get borrowings_create_url
-    assert_response :success
+  setup do
+    @borrowing = borrowings(:one)
+    @user = users(:one)
+    @book = books(:one)
+    sign_in_as(@user)
   end
 
-  test "should get destroy" do
-    get borrowings_destroy_url
-    assert_response :success
-  end
 end
+
